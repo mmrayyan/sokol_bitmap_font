@@ -25,11 +25,14 @@ static void frame(void) {
   sgp_set_color(0.1f, 0.1f, 0.1f, 1.0f);
   sgp_clear();
 
-  sbm_draw_string(&minogram_font, "Hello,World", 10, (sgp_rect) {
+  const char *s = "Hello,world!";
+  sbm_draw_string(&minogram_font, (sbm_draw_opts) {
+    .string = s,
+    .string_len = strlen(s),
+    .font_size = 90,
     .x = 10,
     .y = 10,
-    .w = 50,
-    .h = 80,
+    .gap = 10,
   });
 
   sgp_flush();

@@ -73,7 +73,7 @@ See [`sokol_bitmap.h`](sokol_bitmap.h) for full API documentation.
 
 ## Example
 
-See [`test/main.c`](test/main.c) for a complete usage example.
+See [`example/main.c`](example/main.c) for a complete usage example.
 
 **Font Attribution:**  
 The font used in the example is [**Minogram 6x10**](https://frostyfreeze.itch.io/pixel-bitmap-fonts-png-xml) by frostyfreeze on itch.io.

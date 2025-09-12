@@ -2,7 +2,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 size_t find_max(const char *chars, size_t num_chars) {
   if (num_chars == 0) {
@@ -92,15 +91,15 @@ void sbm_draw_char(sbm_font *self, char c, sgp_rect r) {
   sgp_reset_image(0);
 }
 
-void sbm_draw_string(sbm_font *self, const char *s, float gap, sgp_rect r) {
-  size_t len = strlen(s);
+void sbm_draw_string(sbm_font *self, sbm_draw_opts opts) {
+  float w = opts.font_size * self->desc.char_width_pixels / self->desc.char_height_pixels;
 
-  for (size_t i = 0; i < len; i++) {
-    sbm_draw_char(self, s[i], (sgp_rect) {
-      .x = r.x + (i * (r.w + gap)),
-      .y = r.y,
-      .w = r.w,
-      .h = r.h,
+  for (size_t i = 0; i < opts.string_len; i++) {
+    sbm_draw_char(self, opts.string[i], (sgp_rect) {
+      .x = opts.x + (i * (w + opts.gap)),
+      .y = opts.y,
+      .w = w,
+      .h = opts.font_size,
     });
   }
 }

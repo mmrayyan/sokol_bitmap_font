@@ -30,10 +30,21 @@ typedef struct sbm_font {
   size_t max_val;
 } sbm_font;
 
+typedef struct sbm_draw_opts {
+  const char *string;
+  size_t string_len;
+
+  uint32_t font_size;
+
+  float x;
+  float y;
+  float gap;
+} sbm_draw_opts;
+
 bool sbm_init_font(sbm_font *self, sbm_desc desc);
 void sbm_free_font(sbm_font *self);
 
 void sbm_draw_char(sbm_font *self, char c, sgp_rect r);
-void sbm_draw_string(sbm_font *self, const char *s, float gap, sgp_rect r);
+void sbm_draw_string(sbm_font *self, sbm_draw_opts opts);
 
 #endif

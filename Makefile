@@ -1,6 +1,6 @@
 CC = gcc
-SRC = ./test/main.c ./test/sokol.c ./sokol_bitmap.c
-OUT = ./test/main
+SRC = ./example/main.c ./example/sokol.c ./sokol_bitmap.c
+OUT = ./example/main
 INCLUDE = ./include
 CFLAGS = -mwin32 -I$(INCLUDE)
 LDFLAGS = -lkernel32 -luser32 -lshell32 -lgdi32
