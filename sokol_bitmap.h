@@ -9,6 +9,8 @@ typedef struct bitmap_desc {
 
   uint32_t img_width_pixels;
   uint32_t img_height_pixels;
+  uint32_t img_padding_x_pixels;
+  uint32_t img_padding_y_pixels;
   uint32_t char_width_pixels;
   uint32_t char_height_pixels;
   uint32_t char_padding_x_pixels;

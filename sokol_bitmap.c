@@ -76,14 +76,16 @@ void bitmap_draw_char(bitmap_font *self, char c, sgp_rect r) {
   uint32_t x_tiles = index % self->img_width_chars;
   uint32_t y_tiles = index / self->img_width_chars;
 
-  uint32_t x_pixels = x_tiles * (self->desc.char_width_pixels + self->desc.char_padding_x_pixels);
-  uint32_t y_pixels = y_tiles * (self->desc.char_height_pixels + self->desc.char_padding_y_pixels);
+  uint32_t x_pixels = self->desc.img_padding_x_pixels +
+                      x_tiles * (self->desc.char_width_pixels + self->desc.char_padding_x_pixels);
+  uint32_t y_pixels = self->desc.img_padding_y_pixels +
+                      y_tiles * (self->desc.char_height_pixels + self->desc.char_padding_y_pixels);
 
   sgp_set_image(0, self->desc.img);
   sgp_set_blend_mode(SGP_BLENDMODE_ADD);
   sgp_draw_textured_rect(0, r, (sgp_rect) {
     .x = x_pixels,
-    .y = 1 + y_pixels,
+    .y = y_pixels,
     .w = self->desc.char_width_pixels,
     .h = self->desc.char_height_pixels,
   });
