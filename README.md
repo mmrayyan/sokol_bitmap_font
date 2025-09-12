@@ -50,18 +50,24 @@ sbm_init_font(&font, desc);
 
 ### 4. Draw text
 
-Call `bitmap_draw_char` or `bitmap_draw_line` inside your frame rendering function:
+Call `sbm_draw_char` or `sbm_draw_string` inside your frame rendering function:
 
 ```c
-bitmap_draw_line(&font, "Hello, World!", 10, (sgp_rect){
-    .x = 10, .y = 10, .w = 50, .h = 80
-});
+const char *s = "Hello,world!";
+sbm_draw_opts opts = {
+    .string = s,
+    .string_len = strlen(s),
+    .font_size = 50,
+    .gap = 10,
+};
+
+sbm_draw_string(&minogram_font, opts);
 ```
 
 ### 5. Cleanup
 
 ```c
-bitmap_free(&font);
+sbm_free_font(&font);
 ```
 
 ## API Reference
