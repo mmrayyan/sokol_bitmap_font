@@ -103,3 +103,10 @@ void sbm_draw_string(sbm_font *self, sbm_draw_opts opts) {
     });
   }
 }
+
+float sbm_measure_string(sbm_font *self, sbm_draw_opts opts) {
+  float w = opts.font_size * self->desc.char_width_pixels / self->desc.char_height_pixels;
+  float length = opts.string_len * (w + opts.gap) - opts.gap;
+
+  return length;
+}

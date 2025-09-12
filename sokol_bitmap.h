@@ -71,4 +71,12 @@ void sbm_draw_char(sbm_font *self, char c, sgp_rect r);
  */
 void sbm_draw_string(sbm_font *self, sbm_draw_opts opts);
 
+/**
+ * Measures the width of a string when rendered with the bitmap font and options.
+ * @param self Pointer to the font object.
+ * @param opts Drawing options including string, font size, and gap.
+ * @returns The width of the rendered string in pixels.
+ */
+float sbm_measure_string(sbm_font *self, sbm_draw_opts opts);
+
 #endif
