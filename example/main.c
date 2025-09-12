@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+#include <string.h>
 
 static sbm_font minogram_font;
 
@@ -25,15 +25,22 @@ static void frame(void) {
   sgp_set_color(0.1f, 0.1f, 0.1f, 1.0f);
   sgp_clear();
 
+  // String options
   const char *s = "Hello,world!";
-  sbm_draw_string(&minogram_font, (sbm_draw_opts) {
+  sbm_draw_opts opts = {
     .string = s,
     .string_len = strlen(s),
-    .font_size = 90,
-    .x = 10,
-    .y = 10,
+    .font_size = 50,
     .gap = 10,
-  });
+  };
+
+  // Get string width after drawing
+  float len = sbm_measure_string(&minogram_font, opts);
+
+  // Center text in window
+  opts.x = width / 2  - len / 2;
+  opts.y = height / 2 - opts.font_size / 2;
+  sbm_draw_string(&minogram_font, opts);
 
   sgp_flush();
   sgp_end();
