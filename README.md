@@ -30,10 +30,12 @@ Create a PNG image containing all glyphs arranged in a grid. You will need to kn
 #include "sokol_bitmap.h"
 
 // Load your font texture as sg_image (using stb_image or similar)
-bitmap_desc desc = {
+sbm_desc desc = {
     .img = my_font_texture,
     .img_width_pixels = ...,
     .img_height_pixels = ...,
+    .img_padding_x_pixels = ...,
+    .img_padding_y_pixels = ...,
     .char_width_pixels = ...,
     .char_height_pixels = ...,
     .char_padding_x_pixels = ...,
@@ -42,8 +44,8 @@ bitmap_desc desc = {
     .num_chars = strlen(chars),
 };
 
-bitmap_font font;
-bitmap_init(&font, desc);
+sbm_font font;
+sbm_init_font(&font, desc);
 ```
 
 ### 4. Draw text
@@ -66,14 +68,17 @@ bitmap_free(&font);
 
 See [`sokol_bitmap.h`](sokol_bitmap.h) for full API documentation.
 
-- `bool bitmap_init(bitmap_font *self, bitmap_desc desc);`
-- `void bitmap_free(bitmap_font *self);`
-- `void bitmap_draw_char(bitmap_font *self, char c, sgp_rect r);`
-- `void bitmap_draw_line(bitmap_font *self, const char *s, float gap, sgp_rect r);`
+- `bool sbm_init_font(sbm_font *self, sbm_desc desc);`
+- `void sbm_free_font(sbm_font *self);`
+- `void sbm_draw_char(sbm_font *self, char c, sgp_rect r);`
+- `void sbm_draw_string(sbm_font *self, sbm_draw_opts opts);`
+- `float sbm_measure_string(sbm_font *self, sbm_draw_opts opts);`
 
 ## Example
 
 See [`example/main.c`](example/main.c) for a complete usage example.
+
+![Example Screenshot](example/screenshot.png)
 
 **Font Attribution:**  
 The font used in the example is [**Minogram 6x10**](https://frostyfreeze.itch.io/pixel-bitmap-fonts-png-xml) by frostyfreeze on itch.io.
