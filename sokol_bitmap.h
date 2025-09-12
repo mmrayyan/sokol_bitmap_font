@@ -4,7 +4,7 @@
 #include "sokol_gfx.h"
 #include "sokol_gp.h"
 
-typedef struct bitmap_desc {
+typedef struct sbm_desc {
   sg_image img;
 
   uint32_t img_width_pixels;
@@ -18,22 +18,22 @@ typedef struct bitmap_desc {
 
   const char *chars;
   size_t num_chars;
-} bitmap_desc;
+} sbm_desc;
 
-typedef struct bitmap_font {
-  bitmap_desc desc;
+typedef struct sbm_font {
+  sbm_desc desc;
 
   uint32_t img_width_chars;
   uint32_t img_height_chars;
 
   size_t *char_jump_tbl;
   size_t max_val;
-} bitmap_font;
+} sbm_font;
 
-bool bitmap_init(bitmap_font *self, bitmap_desc desc);
-void bitmap_free(bitmap_font *self);
+bool sbm_init_font(sbm_font *self, sbm_desc desc);
+void sbm_free_font(sbm_font *self);
 
-void bitmap_draw_char(bitmap_font *self, char c, sgp_rect r);
-void bitmap_draw_line(bitmap_font *self, const char *s, float gap, sgp_rect r);
+void sbm_draw_char(sbm_font *self, char c, sgp_rect r);
+void sbm_draw_string(sbm_font *self, const char *s, float gap, sgp_rect r);
 
 #endif

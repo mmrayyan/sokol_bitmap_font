@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-static bitmap_font minogram_font;
+static sbm_font minogram_font;
 
 static void frame(void) {
   sg_begin_pass(&(sg_pass){.swapchain = sglue_swapchain()});
@@ -25,7 +25,7 @@ static void frame(void) {
   sgp_set_color(0.1f, 0.1f, 0.1f, 1.0f);
   sgp_clear();
 
-  bitmap_draw_line(&minogram_font, "Hello,World", 10, (sgp_rect) {
+  sbm_draw_string(&minogram_font, "Hello,World", 10, (sgp_rect) {
     .x = 10,
     .y = 10,
     .w = 50,
@@ -78,7 +78,7 @@ static void init(void) {
   // Initialize font
   const char *minogram_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-=()[]{}<>/*:#%!?.,'\"@&$ ";
   size_t minogram_nchars = strlen(minogram_chars);
-  bitmap_desc minogram_desc = {
+  sbm_desc minogram_desc = {
     .img = minogram_texture,
     .img_width_pixels = width,
     .img_height_pixels = height,
@@ -92,14 +92,14 @@ static void init(void) {
     .num_chars = minogram_nchars,
   };
 
-  if (!bitmap_init(&minogram_font, minogram_desc)) {
+  if (!sbm_init_font(&minogram_font, minogram_desc)) {
     fprintf(stderr, "Failed to initialize bitmap font!\n");
     exit(-1);
   }
 }
 
 static void cleanup(void) {
-  bitmap_free(&minogram_font);
+  sbm_free_font(&minogram_font);
   sgp_shutdown();
   sg_shutdown();
 }

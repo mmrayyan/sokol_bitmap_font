@@ -31,7 +31,7 @@ bool build_char_jump_tbl(size_t *tbl, const char *chars, size_t num_chars) {
   return true;
 }
 
-bool bitmap_init(bitmap_font *self, bitmap_desc desc) {
+bool sbm_init_font(sbm_font *self, sbm_desc desc) {
   if (!self) {
     return false;
   }
@@ -59,14 +59,14 @@ bool bitmap_init(bitmap_font *self, bitmap_desc desc) {
   return true;
 }
 
-void bitmap_free(bitmap_font *self) {
+void sbm_free_font(sbm_font *self) {
   if (self && self->char_jump_tbl) {
     free(self->char_jump_tbl);
     self->char_jump_tbl = NULL;
   }
 }
 
-void bitmap_draw_char(bitmap_font *self, char c, sgp_rect r) {
+void sbm_draw_char(sbm_font *self, char c, sgp_rect r) {
   if (!self || (size_t)c > self->max_val) {
     return;
   }
@@ -92,11 +92,11 @@ void bitmap_draw_char(bitmap_font *self, char c, sgp_rect r) {
   sgp_reset_image(0);
 }
 
-void bitmap_draw_line(bitmap_font *self, const char *s, float gap, sgp_rect r) {
+void sbm_draw_string(sbm_font *self, const char *s, float gap, sgp_rect r) {
   size_t len = strlen(s);
 
   for (size_t i = 0; i < len; i++) {
-    bitmap_draw_char(self, s[i], (sgp_rect) {
+    sbm_draw_char(self, s[i], (sgp_rect) {
       .x = r.x + (i * (r.w + gap)),
       .y = r.y,
       .w = r.w,
