@@ -4,7 +4,7 @@ Minimal bitmap font rendering for Sokol GP
 
 ## Overview
 
-`sokol_bitmap_font` is a lightweight C library for drawing bitmap fonts in [Sokol](https://github.com/floooh/sokol) applications using the [Sokol GP](https://github.com/edubart/sokol_gp) 2D graphics API. It allows you to render text using a pre-generated bitmap font atlas, leveraging Sokol GP's batching and draw functions for efficient rendering.
+`sokol_bitmap_font` is a lightweight header-only C library for drawing bitmap fonts in [Sokol](https://github.com/floooh/sokol) applications using the [Sokol GP](https://github.com/edubart/sokol_gp) 2D graphics API. It allows you to render text using a pre-generated bitmap font atlas, leveraging Sokol GP's batching and draw functions for efficient rendering.
 
 ## Features
 
@@ -18,7 +18,23 @@ Minimal bitmap font rendering for Sokol GP
 
 ### 1. Add the library
 
-Copy `sokol_bitmap.h` and `sokol_bitmap.c` into your project. Make sure you have Sokol headers (`sokol_gfx.h`, `sokol_gp.h`, etc.) available.
+Copy `sokol_bitmap.h` into your project. Make sure you have Sokol headers (`sokol_gfx.h`, `sokol_gp.h`, etc.) available.
+
+To include the implementation, **define `SOKOL_BITMAP_IMPL` in exactly one `.c` file**, like so:
+
+```c
+// sokol.c or main.c
+#define SOKOL_BITMAP_IMPL
+#include "sokol_bitmap.h"
+```
+
+In all other files, simply:
+
+```c
+#include "sokol_bitmap.h"
+```
+
+This ensures the implementation is only compiled once. See [`example/sokol.c`](example/sokol.c) for how this is done.
 
 ### 2. Prepare a bitmap font atlas
 
@@ -53,15 +69,15 @@ sbm_init_font(&font, desc);
 Call `sbm_draw_char` or `sbm_draw_string` inside your frame rendering function:
 
 ```c
-const char *s = "Hello,world!";
+const char *s = ...;
 sbm_draw_opts opts = {
     .string = s,
     .string_len = strlen(s),
-    .font_size = 50,
-    .gap = 10,
+    .font_size = ...,
+    .gap = ...,
 };
 
-sbm_draw_string(&minogram_font, opts);
+sbm_draw_string(&font, opts);
 ```
 
 ### 5. Cleanup
