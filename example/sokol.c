@@ -5,3 +5,6 @@
 #include "sokol_gp.h"
 #include "sokol_glue.h"
 #include "sokol_log.h"
+
+#define SOKOL_BITMAP_IMPL
+#include "../sokol_bitmap.h"

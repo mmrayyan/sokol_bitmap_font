@@ -1,5 +1,5 @@
 CC = gcc
-SRC = ./example/main.c ./example/sokol.c ./sokol_bitmap.c
+SRC = ./example/main.c ./example/sokol.c
 OUT = ./example/main
 INCLUDE = ./include
 CFLAGS = -mwin32 -I$(INCLUDE)
