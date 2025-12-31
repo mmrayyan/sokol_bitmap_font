@@ -51,6 +51,10 @@ typedef struct sbm_draw_opts {
 // ║ API DOCUMENTATION ║
 // ╚═══════════════════╝
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Initializes a bitmap font with the given description.
  * @param self Pointer to the font object to initialize.
@@ -87,6 +91,10 @@ void sbm_draw_string(sbm_font *self, sbm_draw_opts opts);
  * @returns The width of the rendered string in pixels.
  */
 float sbm_measure_string(sbm_font *self, sbm_draw_opts opts);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // SOKOL_BITMAP_H
 
